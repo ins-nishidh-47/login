@@ -1,14 +1,19 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   // States to store username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   // Handle input change
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
     if (name === "username") {
       setUsername(value);
     } else if (name === "password") {
@@ -26,23 +31,26 @@ const Login = () => {
     } else {
       setError(""); // Clear error message if validation is successful
       console.log("Logging in with", username, password);
+      navigate("/testing");
   
       // Implement your login logic here (e.g., API call)
   
       // Timeout of 10 seconds to reset the page
-      setTimeout(() => {
-        console.log("Timeout reached, resetting page");
+    //   setTimeout(() => {
+    //     console.log("Timeout reached, resetting page");
         
-        // Reset form fields and errors here
-        setUsername("");  // Assuming you have a `username` state
-        setPassword("");  // Assuming you have a `password` state
-        setError("");     // Reset any error messages
-        // If you want to reload the page, you can use:
-        // window.location.reload(); // Uncomment to refresh the page
-        alert("BKL Kitna time lega")
+    //     // Reset form fields and errors here
+    //     setUsername("");  // Assuming you have a `username` state
+    //     setPassword("");  // Assuming you have a `password` state
+    //     setError("");     // Reset any error messages
+    //     // If you want to reload the page, you can use:
+    //     // window.location.reload(); // Uncomment to refresh the page
+    //     alert("BKL Kitna time lega")
   
-      }, 10000); // 10-second timeout
+    //   }, 10000); // 10-second timeout
     }
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
   };
   
  return (
