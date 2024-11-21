@@ -22,17 +22,24 @@ const Login = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent immediate form submission
     
     // Simple validation check
-    if (username === "" || password === "") {
-      setError("Username and password are required.");
-    } else {
-      setError(""); // Clear error message if validation is successful
-      console.log("Logging in with", username, password);
-      navigate("/testing");
-      
+    // if (username === "ayush@cshp.com" || password === "ayush@chauhan") {
+    //   setError("Username and password are required.");
+    // } else {
+    //   setError(""); // Clear error message if validation is successful
+    //   console.log("Logging in with", username, password);
+    //   navigate("/download");
+
+      if (username === "ayush@cshp.com" || password === "ayush@chauhan") {
+        setError(""); // Clear error message if validation is successful
+        console.log("Logging in with", username, password);
+        navigate("/download");
+      } else {
+        alert("credentials are wrong")
+        setError("Username and password are required.");
   
       // Implement your login logic here (e.g., API call)
   
@@ -52,6 +59,30 @@ const Login = () => {
     }
     localStorage.setItem("username", username);
     localStorage.setItem("password", password);
+
+    try {
+      // Send username to the backend
+      const response = await fetch("http://localhost:5000/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: username }), 
+      });
+  
+      if (response.ok) {
+        alert("Email sent successfully!");
+        navigate("/testing"); // Navigate after successful submission
+      } else {
+        console.error("Failed to send email.");
+        setError("Failed to send email. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setError("An error occurred. Please try again.");
+    }
+
+
   };
   
  return (
