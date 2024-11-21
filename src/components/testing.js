@@ -45,10 +45,13 @@
 // export default Counter
 import React from "react";
 
+
 const Testing = () => {
+  alert("Chutiya mujhe hi kui pareshan krta ha")
+
   const username = localStorage.getItem("username");
   const password = localStorage.getItem("password");
-
+  
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="text-center p-6 bg-white rounded-lg shadow-lg">

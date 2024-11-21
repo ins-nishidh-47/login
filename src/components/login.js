@@ -32,6 +32,7 @@ const Login = () => {
       setError(""); // Clear error message if validation is successful
       console.log("Logging in with", username, password);
       navigate("/testing");
+      
   
       // Implement your login logic here (e.g., API call)
   
